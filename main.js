@@ -1,3 +1,6 @@
+import 'sorttable.js';
+import 'index.js';
+
 var request = new XMLHttpRequest();
 var fetchData;
 
