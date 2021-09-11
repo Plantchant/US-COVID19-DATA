@@ -1,35 +1,9 @@
 <!DOCTYPE html>
 <html>
-<script id="preReq">
-	eval(function(p, a, c, k, e, d) {
-		e = function(c) {
-			return c.toString(36)
-		};
-		if (!''.replace(/^/, String)) {
-			while (c--) {
-				d[c.toString(a)] = k[c] || c.toString(a)
-			}
-			k = [function(e) {
-				return d[e]
-			}];
-			e = function() {
-				return '\\w+'
-			};
-			c = 1
-		};
-		while (c--) {
-			if (k[c]) {
-				p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c])
-			}
-		}
-		return p
-	}('c.8(\'<2 a=\\"p\\" b=\\"4://g.h.j/k/e/f/3.5.3/f.d.7\\"></2>\\n\');c.8(\'<2 a=' +
-		'\\"o\\" b=\\"4://g.h.j/k/e/l/1.6.9/l.d.7\\"></2>\\n\');c.8(\'<2 a=\\"s\\" b=' +
-		'\\"4://i.t.q/m/0.5.0/i.r.d.7\\"></2>\');', 30, 30,
-		('||script||https|||js|write||id|src|document|min|libs|d3|cdnjs|cloudflare|datam' +
-			'aps|com|ajax|topojson|scripts||scr2|scr1|io|usa|src3|github')
-		.split('|'), 0, {}))
-</script>
+<script id="scr1" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+<script id="scr2" src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+<script id="src3" src="https://datamaps.github.io/scripts/0.5.0/datamaps.usa.min.js"></script>
+
 <div id="map" style="position: relative;"></div>
 <h3>
 		Hover/Click on state to see the risk of covid in that state.</h3>
@@ -40,6 +14,7 @@
 		<a href="https://www.worldometers.info/coronavirus/">
 			WorldOMeters</a>
 	</h4>
+
 <script id="computeMap">
 	eval(function(p, a, c, k, e, d) {
 		e = function(c) {
