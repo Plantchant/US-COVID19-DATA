@@ -1,4 +1,76 @@
 <!DOCTYPE html>
+<html>
 <body>
-<script async src="//jsfiddle.net/Plantchant/b3ykrzmd/7/embed/result/"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+<script src="https://datamaps.github.io/scripts/0.5.0/datamaps.usa.min.js"></script>
+<div id="map" style="position: relative;"></div>
+<h3>
+  Hover/Click on state to see the risk of covid in that state.</h3>
+<h4>For example, if the risk is 0.3, you have a 0.3% of catching covid in that state within the next 10 days.
+</h4>
+<h4>Source: <a href="https://www.worldometers.info/coronavirus/"> WorldOMeters</a>
+</h4>
+
+<script>
+  var request = new XMLHttpRequest();
+  var prepareData = request;
+  var fetchedData;
+  request.open('GET', 'https://api.apify.com/v2/acts/rcRx9HudInNmsDbxY/runs/last/dataset/items?token=pZYb9WaePXfisRpno7uW5WZdM&status=SUCCEEDED');
+
+  request.setRequestHeader('Content-Type', 'application/json');
+
+  request.onreadystatechange = function() {
+    if (this.readyState === 4) {
+      var parsed = JSON.parse(this.responseText);
+      fetchedData = parsed[0];
+    }
+  };
+
+  request.send(JSON.stringify({}));
+
+  function createMap() {
+    if (fetchedData) {
+      console.log(fetchedData);
+      var map = new Datamap({
+        element: document.getElementById("map"),
+        scope: "usa",
+        responsive: true,
+        fills: {},
+        data: fetchedData,
+        geographyConfig: {
+          borderColor: '#8C8C8C',
+          highlightFillColor: '#8C4242',
+          popupTemplate: function(geo, data) {
+            return ['<div class="hoverinfo"><strong>',
+              geo.properties.name,
+              '<br>Risk: ',
+              data.numberOfThings,
+              '</strong></div>'
+            ].join('');
+          }
+        }
+      });
+
+      window.addEventListener("resize", function() {
+        map.resize();
+      });
+
+      prepareData.open('POST', 'https://api.apify.com/v2/acts/rcRx9HudInNmsDbxY/runs?token=pZYb9WaePXfisRpno7uW5WZdM');
+
+      prepareData.setRequestHeader('Content-Type', 'application/json');
+
+      prepareData.onreadystatechange = function() {
+        if (this.readyState === 4) {}
+      };
+
+      prepareData.send(JSON.stringify({}));
+    }
+  }
+
+  setTimeout(createMap, 1000);
+  createMap();
+
+</script>
 </body>
+</html>
